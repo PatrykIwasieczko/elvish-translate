@@ -1,16 +1,32 @@
 import { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { HeroBanner } from "./components/HeroBanner/HeroBanner";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { isAuthenticated, login, logout } from "./utils/auth";
+import Favourites from "./routes/Favourites";
+import { Translation } from "./utils/types";
 
 function App() {
   const [text, setText] = useState("");
-  const [translation, setTranslation] = useState({ english: "", elvish: "" });
+  const [translation, setTranslation] = useState<Translation>();
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
 
   const handleTranslate = (text: string) => {
-    setTranslation({ english: text, elvish: "translation" });
+    setTranslation({
+      id: crypto.randomUUID(),
+      english: text,
+      elvish: "translation",
+    });
+  };
+
+  const handleAddToFavourite = (translation: Translation) => {
+    const favouriteTranslations = JSON.parse(
+      localStorage.getItem("favouriteTranslations") || JSON.stringify("")
+    );
+
+    localStorage.setItem(
+      "favouriteTranslations",
+      JSON.stringify([...favouriteTranslations, translation])
+    );
   };
 
   return (
@@ -75,7 +91,7 @@ function App() {
                     </button>
                   </div>
 
-                  {translation.elvish && (
+                  {translation && (
                     <div className="mt-4 bg-gray-100 p-4 rounded-lg shadow">
                       <h2 className="text-xl">Translation:</h2>
                       <p>English: {translation.english}</p>
@@ -83,7 +99,7 @@ function App() {
                       {isLoggedIn && (
                         <>
                           <button
-                            onClick={() => console.log("add favourite")}
+                            onClick={() => handleAddToFavourite(translation)}
                             className="bg-green-500 text-white px-4 py-2 rounded-lg mt-2"
                           >
                             Add to Favourites
@@ -97,17 +113,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/favourites"
-            element={
-              <PrivateRoute>
-                <div className="container mx-auto p-6">
-                  <h1 className="text-2xl mb-4">Favourite Translations</h1>
-                  <div>Todo</div>
-                </div>
-              </PrivateRoute>
-            }
-          />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </div>
     </BrowserRouter>
