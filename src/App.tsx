@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { HeroBanner } from "./components/HeroBanner/HeroBanner";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { isAuthenticated, login, logout } from "./utils/auth";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState({ english: "", elvish: "" });
+  const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
 
   const handleTranslate = (text: string) => {
     setTranslation({ english: text, elvish: "translation" });
@@ -27,6 +29,7 @@ function App() {
                 <button
                   className="text-white"
                   onClick={() => {
+                    logout();
                     setIsLoggedIn(false);
                   }}
                 >
@@ -36,6 +39,7 @@ function App() {
                 <button
                   className="text-white"
                   onClick={() => {
+                    login(crypto.randomUUID());
                     setIsLoggedIn(true);
                   }}
                 >
@@ -96,14 +100,12 @@ function App() {
           <Route
             path="/favourites"
             element={
-              isLoggedIn ? (
+              <PrivateRoute>
                 <div className="container mx-auto p-6">
                   <h1 className="text-2xl mb-4">Favourite Translations</h1>
                   <div>Todo</div>
                 </div>
-              ) : (
-                <Navigate to="/" />
-              )
+              </PrivateRoute>
             }
           />
         </Routes>
