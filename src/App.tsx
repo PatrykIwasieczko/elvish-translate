@@ -4,15 +4,15 @@ import { HeroBanner } from "./components/HeroBanner/HeroBanner";
 import { isAuthenticated, login, logout } from "./utils/auth";
 import Favourites from "./routes/Favourites";
 import { Translation } from "./utils/types";
-import { useDispatch } from "react-redux";
-import { addFavourite } from "./store/favouritesSlice";
+import { addFavourite } from "./store/actions";
+import { useAppDispatch } from "./store/store";
 
 function App() {
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState<Translation>();
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleTranslate = (text: string) => {
     setTranslation({
@@ -20,6 +20,12 @@ function App() {
       english: text,
       elvish: "translation",
     });
+  };
+
+  const handleAddFavourite = () => {
+    if (translation) {
+      dispatch(addFavourite(translation));
+    }
   };
 
   return (
@@ -92,7 +98,7 @@ function App() {
                       {isLoggedIn && (
                         <>
                           <button
-                            onClick={() => dispatch(addFavourite(translation))}
+                            onClick={handleAddFavourite}
                             className="bg-green-500 text-white px-4 py-2 rounded-lg mt-2"
                           >
                             Add to Favourites

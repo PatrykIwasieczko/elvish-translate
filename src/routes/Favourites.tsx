@@ -1,13 +1,10 @@
 import TranslationCard from "../components/TranslationCard/TranslationCard";
 import { Translation } from "../utils/types";
 
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
+import { RootState, useAppSelector } from "../store/store";
 
 const Favourites: React.FC = () => {
-  const favourites = useSelector(
-    (state: RootState) => state.translations.favourites
-  );
+  const favourites = useAppSelector((state: RootState) => state.favourites);
 
   return (
     <div className="p-4">

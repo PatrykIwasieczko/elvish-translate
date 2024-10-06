@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deleteFavourite, editFavourite } from "../../store/favouritesSlice";
 import { TranslationCardProps } from "./TranslationCard.interface";
+import { deleteFavourite, editFavourite } from "../../store/actions";
+import { useAppDispatch } from "../../store/store";
 
 const TranslationCard: React.FC<TranslationCardProps> = ({ translation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTranslation, setEditedTranslation] = useState(translation);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
