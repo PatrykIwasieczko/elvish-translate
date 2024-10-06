@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "jest",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,6 +14,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.13",
     "@types/js-cookie": "^3.0.6",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",

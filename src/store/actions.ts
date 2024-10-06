@@ -41,7 +41,7 @@ export const fetchTranslation =
 
 export const addFavourite = (translation: Translation) => {
   return (dispatch: Dispatch) => {
-    const favourites = getLocalStorageItems(FAVOURITE_TRANSLATIONS);
+    const favourites = getLocalStorageItems(FAVOURITE_TRANSLATIONS) || [];
     favourites.push(translation);
     saveLocalStorageItems(FAVOURITE_TRANSLATIONS, favourites);
 

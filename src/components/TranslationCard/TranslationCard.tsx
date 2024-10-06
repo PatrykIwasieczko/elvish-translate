@@ -3,16 +3,18 @@ import { TranslationCardProps } from "./TranslationCard.interface";
 import { deleteFavourite, editFavourite } from "../../store/actions";
 import { useAppDispatch } from "../../store/store";
 
-const TranslationCard: React.FC<TranslationCardProps> = ({ translation }) => {
+export const TranslationCard: React.FC<TranslationCardProps> = ({
+  translation,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTranslation, setEditedTranslation] = useState(translation);
   const dispatch = useAppDispatch();
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg my-4 min-h-[200px] w-full flex flex-col justify-between">
       <div className="px-6 py-4">
         {isEditing ? (
-          <div className="text-gray-800 text-lg font-semibold mb-4">
+          <div className="text-gray-800 text-lg mb-4">
             <p>
               <strong>English:</strong>{" "}
               <input
@@ -41,11 +43,11 @@ const TranslationCard: React.FC<TranslationCardProps> = ({ translation }) => {
             </p>
           </div>
         ) : (
-          <div className="text-gray-800 text-lg font-semibold mb-4">
-            <p>
+          <div className="text-gray-800 text-lg mb-4">
+            <p className="break-words">
               <strong>English:</strong> {translation.english}
             </p>
-            <p>
+            <p className="break-words">
               <strong>Elvish:</strong> {translation.elvish}
             </p>
           </div>
@@ -86,5 +88,3 @@ const TranslationCard: React.FC<TranslationCardProps> = ({ translation }) => {
     </div>
   );
 };
-
-export default TranslationCard;

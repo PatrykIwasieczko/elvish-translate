@@ -16,9 +16,8 @@ export const HeroBanner = () => {
           <p className="text-lg md:text-xl mb-6">
             Ever wanted to chat with Legolas? Now you can translate your
             messages to Elvish and impress your friends (or confuse them). Time
-            to take the hobbits to Isengard!
+            to take the hobbits from Isengard!
           </p>
-          <button>Start Translating</button>
         </div>
       </div>
     </div>
