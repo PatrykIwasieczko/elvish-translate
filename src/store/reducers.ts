@@ -7,16 +7,21 @@ import {
   FAVOURITE_TRANSLATIONS,
   TRANSLATION,
   CLEAR_TRANSLATION,
+  LOGIN,
+  LOGOUT,
 } from "../utils/consts";
+import Cookies from "js-cookie";
 import { getLocalStorageItems } from "../utils/localStorage";
 import { Translation, TranslationActionTypes } from "../utils/types";
 
 type State = {
+  isAuthenticated: boolean;
   translation: Translation | null;
   favourites: Translation[];
 };
 
 const initialState: State = {
+  isAuthenticated: !!Cookies.get("user"),
   translation: getLocalStorageItems(TRANSLATION),
   favourites: getLocalStorageItems(FAVOURITE_TRANSLATIONS),
 };
@@ -26,6 +31,16 @@ export const rootReducer = (
   action: TranslationActionTypes
 ) => {
   switch (action.type) {
+    case LOGIN:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+      };
     case FETCH_TRANSLATION_SUCCESS:
       return {
         ...state,

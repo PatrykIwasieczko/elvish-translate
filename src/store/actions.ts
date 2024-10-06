@@ -1,4 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import {
   getLocalStorageItems,
   saveLocalStorageItems,
@@ -14,8 +15,30 @@ import {
   API_URL,
   TRANSLATION,
   CLEAR_TRANSLATION,
+  LOGIN,
+  LOGOUT,
 } from "../utils/consts";
 import { Translation } from "../utils/types";
+
+export const login = () => {
+  return (dispatch: Dispatch) => {
+    Cookies.set("user", crypto.randomUUID(), { expires: 1 });
+
+    dispatch({
+      type: LOGIN,
+    });
+  };
+};
+
+export const logout = () => {
+  return (dispatch: Dispatch) => {
+    Cookies.remove("user");
+
+    dispatch({
+      type: LOGOUT,
+    });
+  };
+};
 
 export const fetchTranslation =
   (text: string) => async (dispatch: Dispatch) => {

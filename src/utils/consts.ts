@@ -11,3 +11,5 @@ export const LOAD_FAVOURITES = "loadFavourites";
 export const DELETE_FAVOURITE = "deleteFavourites";
 export const EDIT_FAVOURITE = "editFavourite";
 export const CLEAR_TRANSLATION = "clearTranslation";
+export const LOGIN = "login";
+export const LOGOUT = "logout";

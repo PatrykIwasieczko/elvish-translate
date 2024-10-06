@@ -6,6 +6,8 @@ import {
   FETCH_TRANSLATION,
   FETCH_TRANSLATION_SUCCESS,
   LOAD_FAVOURITES,
+  LOGIN,
+  LOGOUT,
 } from "./consts";
 
 export type Translation = {
@@ -49,6 +51,14 @@ export interface LoadFavouritesAction {
   payload: Translation[];
 }
 
+export interface LoginAction {
+  type: typeof LOGIN;
+}
+
+export interface LogoutAction {
+  type: typeof LOGOUT;
+}
+
 export type TranslationActionTypes =
   | FetchTranslationAction
   | FetchTranslationSuccess
@@ -56,4 +66,6 @@ export type TranslationActionTypes =
   | DeleteFavouriteAction
   | EditFavouriteAction
   | ClearTranslation
-  | LoadFavouritesAction;
+  | LoadFavouritesAction
+  | LoginAction
+  | LogoutAction;
