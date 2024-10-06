@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { TranslationCardProps } from "./TranslationCard.interface";
-import { deleteFavourite, editFavourite } from "../../store/actions";
-import { useAppDispatch } from "../../store/store";
 
 export const TranslationCard: React.FC<TranslationCardProps> = ({
+  isEditing,
+  setIsEditing,
+  editedTranslation,
+  setEditedTranslation,
   translation,
+  onEdit,
+  onDelete,
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedTranslation, setEditedTranslation] = useState(translation);
-  const dispatch = useAppDispatch();
-
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg my-4 min-h-[200px] w-full flex flex-col justify-between">
       <div className="px-6 py-4">
@@ -57,10 +56,7 @@ export const TranslationCard: React.FC<TranslationCardProps> = ({
       <div className="px-6 py-4 border-t border-gray-200 flex justify-between">
         {isEditing ? (
           <button
-            onClick={() => {
-              dispatch(editFavourite(editedTranslation));
-              setIsEditing(false);
-            }}
+            onClick={onEdit}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
           >
             Save
@@ -75,11 +71,7 @@ export const TranslationCard: React.FC<TranslationCardProps> = ({
         )}
 
         <button
-          onClick={() =>
-            isEditing
-              ? setIsEditing(false)
-              : dispatch(deleteFavourite(translation.id))
-          }
+          onClick={onDelete}
           className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
         >
           {isEditing ? "Cancel" : "Delete"}

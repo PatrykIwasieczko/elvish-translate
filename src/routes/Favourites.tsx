@@ -1,7 +1,7 @@
 import { Translation } from "../utils/types";
 
 import { RootState, useAppSelector } from "../store/store";
-import { TranslationCard } from "../components/TranslationCard";
+import { TranslationCardConnect } from "../components/TranslationCard/TranslationCard.connect";
 
 const Favourites: React.FC = () => {
   const favourites = useAppSelector((state: RootState) => state.favourites);
@@ -13,7 +13,10 @@ const Favourites: React.FC = () => {
       {favourites.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {favourites.map((translation: Translation) => (
-            <TranslationCard key={translation.id} translation={translation} />
+            <TranslationCardConnect
+              key={translation.id}
+              translation={translation}
+            />
           ))}
         </div>
       ) : (
