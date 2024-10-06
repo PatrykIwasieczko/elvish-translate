@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import { Translation } from "../../utils/types";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteFavourite, editFavourite } from "../../store/favouritesSlice";
+import { TranslationCardProps } from "./TranslationCard.interface";
 
-interface Props {
-  translation: Translation;
-  onDelete: (id: string) => void;
-  onEdit: (id: string, translation: Translation) => void;
-}
-
-const TranslationCard: React.FC<Props> = ({
-  translation,
-  onDelete,
-  onEdit,
-}) => {
+const TranslationCard: React.FC<TranslationCardProps> = ({ translation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTranslation, setEditedTranslation] = useState(translation);
+  const dispatch = useDispatch();
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
@@ -63,7 +56,7 @@ const TranslationCard: React.FC<Props> = ({
         {isEditing ? (
           <button
             onClick={() => {
-              onEdit(translation.id, editedTranslation);
+              dispatch(editFavourite(editedTranslation));
               setIsEditing(false);
             }}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -81,7 +74,9 @@ const TranslationCard: React.FC<Props> = ({
 
         <button
           onClick={() =>
-            isEditing ? setIsEditing(false) : onDelete(translation.id)
+            isEditing
+              ? setIsEditing(false)
+              : dispatch(deleteFavourite(translation.id))
           }
           className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
         >
