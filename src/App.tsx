@@ -3,23 +3,18 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { HeroBanner } from "./components/HeroBanner/HeroBanner";
 import { isAuthenticated, login, logout } from "./utils/auth";
 import Favourites from "./routes/Favourites";
-import { Translation } from "./utils/types";
-import { addFavourite } from "./store/actions";
-import { useAppDispatch } from "./store/store";
+import { addFavourite, fetchTranslation } from "./store/actions";
+import { RootState, useAppDispatch, useAppSelector } from "./store/store";
 
 function App() {
   const [text, setText] = useState("");
-  const [translation, setTranslation] = useState<Translation>();
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
 
   const dispatch = useAppDispatch();
+  const translation = useAppSelector((state: RootState) => state.translation);
 
-  const handleTranslate = (text: string) => {
-    setTranslation({
-      id: crypto.randomUUID(),
-      english: text,
-      elvish: "translation",
-    });
+  const handleTranslate = () => {
+    dispatch(fetchTranslation(text));
   };
 
   const handleAddFavourite = () => {
@@ -83,7 +78,7 @@ function App() {
                       placeholder="Enter text to translate..."
                     />
                     <button
-                      onClick={() => handleTranslate(text)}
+                      onClick={handleTranslate}
                       className="text-white h-full"
                     >
                       Translate

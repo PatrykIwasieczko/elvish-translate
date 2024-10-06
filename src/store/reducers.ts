@@ -1,4 +1,5 @@
 import {
+  FETCH_TRANSLATION_SUCCESS,
   ADD_FAVOURITE,
   LOAD_FAVOURITES,
   DELETE_FAVOURITE,
@@ -23,6 +24,11 @@ export const rootReducer = (
   action: TranslationActionTypes
 ) => {
   switch (action.type) {
+    case FETCH_TRANSLATION_SUCCESS:
+      return {
+        ...state,
+        translation: action.payload,
+      };
     case ADD_FAVOURITE:
       return {
         ...state,

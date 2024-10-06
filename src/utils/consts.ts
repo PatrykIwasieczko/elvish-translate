@@ -1,7 +1,11 @@
+export const API_URL =
+  "https://api.funtranslations.com/translate/sindarin.json";
+
 export const TRANSLATION = "translation";
 export const FAVOURITE_TRANSLATIONS = "favouriteTranslations";
 
-export const FETCH_TRANSLATION = "fetchTranslation";
+export const FETCH_TRANSLATION_SUCCESS = "fetchTranslationSuccess";
+export const FETCH_TRANSLATION = "fetchTranslationSuccess";
 export const ADD_FAVOURITE = "addFavourite";
 export const LOAD_FAVOURITES = "loadFavourites";
 export const DELETE_FAVOURITE = "deleteFavourites";

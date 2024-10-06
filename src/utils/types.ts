@@ -3,6 +3,7 @@ import {
   DELETE_FAVOURITE,
   EDIT_FAVOURITE,
   FETCH_TRANSLATION,
+  FETCH_TRANSLATION_SUCCESS,
   LOAD_FAVOURITES,
 } from "./consts";
 
@@ -11,6 +12,11 @@ export type Translation = {
   english: string;
   elvish: string;
 };
+
+export interface FetchTranslationSuccess {
+  type: typeof FETCH_TRANSLATION_SUCCESS;
+  payload: Translation;
+}
 
 export interface FetchTranslationAction {
   type: typeof FETCH_TRANSLATION;
@@ -39,6 +45,7 @@ export interface LoadFavouritesAction {
 
 export type TranslationActionTypes =
   | FetchTranslationAction
+  | FetchTranslationSuccess
   | AddFavouriteAction
   | DeleteFavouriteAction
   | EditFavouriteAction

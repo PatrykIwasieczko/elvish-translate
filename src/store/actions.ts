@@ -5,13 +5,31 @@ import {
 } from "../utils/localStorage";
 
 import {
+  FETCH_TRANSLATION_SUCCESS,
   ADD_FAVOURITE,
   LOAD_FAVOURITES,
   DELETE_FAVOURITE,
   FAVOURITE_TRANSLATIONS,
   EDIT_FAVOURITE,
+  API_URL,
 } from "../utils/consts";
 import { Translation } from "../utils/types";
+
+export const fetchTranslation =
+  (text: string) => async (dispatch: Dispatch) => {
+    try {
+      const response = await fetch(`${API_URL}?text=${text}`);
+      const data = await response.json();
+      const elvish = data.contents.translated;
+
+      dispatch({
+        type: FETCH_TRANSLATION_SUCCESS,
+        payload: { english: text, elvish },
+      });
+    } catch (error) {
+      console.error("Error fetching translation:", error);
+    }
+  };
 
 export const addFavourite = (translation: Translation) => {
   return (dispatch: Dispatch) => {
