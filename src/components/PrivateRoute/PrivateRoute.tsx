@@ -1,8 +1,12 @@
 import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../../utils/auth";
+import { RootState, useAppSelector } from "../../store/store";
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  return isAuthenticated() ? children : <Navigate to="/" />;
+  const isAuthenticated = useAppSelector(
+    (state: RootState) => state.isAuthenticated
+  );
+
+  return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

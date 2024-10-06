@@ -23,7 +23,7 @@ type State = {
 const initialState: State = {
   isAuthenticated: !!Cookies.get("user"),
   translation: getLocalStorageItems(TRANSLATION),
-  favourites: getLocalStorageItems(FAVOURITE_TRANSLATIONS),
+  favourites: getLocalStorageItems(FAVOURITE_TRANSLATIONS) || [],
 };
 
 export const rootReducer = (
