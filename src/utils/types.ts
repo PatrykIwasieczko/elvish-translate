@@ -1,5 +1,6 @@
 import {
   ADD_FAVOURITE,
+  CLEAR_TRANSLATION,
   DELETE_FAVOURITE,
   EDIT_FAVOURITE,
   FETCH_TRANSLATION,
@@ -38,6 +39,11 @@ export interface EditFavouriteAction {
   payload: Translation[];
 }
 
+export interface ClearTranslation {
+  type: typeof CLEAR_TRANSLATION;
+  payload: undefined;
+}
+
 export interface LoadFavouritesAction {
   type: typeof LOAD_FAVOURITES;
   payload: Translation[];
@@ -49,4 +55,5 @@ export type TranslationActionTypes =
   | AddFavouriteAction
   | DeleteFavouriteAction
   | EditFavouriteAction
+  | ClearTranslation
   | LoadFavouritesAction;

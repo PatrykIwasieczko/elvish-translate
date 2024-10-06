@@ -5,6 +5,8 @@ import {
   DELETE_FAVOURITE,
   EDIT_FAVOURITE,
   FAVOURITE_TRANSLATIONS,
+  TRANSLATION,
+  CLEAR_TRANSLATION,
 } from "../utils/consts";
 import { getLocalStorageItems } from "../utils/localStorage";
 import { Translation, TranslationActionTypes } from "../utils/types";
@@ -15,7 +17,7 @@ type State = {
 };
 
 const initialState: State = {
-  translation: null,
+  translation: getLocalStorageItems(TRANSLATION),
   favourites: getLocalStorageItems(FAVOURITE_TRANSLATIONS),
 };
 
@@ -43,6 +45,11 @@ export const rootReducer = (
       return {
         ...state,
         favourites: action.payload,
+      };
+    case CLEAR_TRANSLATION:
+      return {
+        ...state,
+        translation: null,
       };
     case LOAD_FAVOURITES:
       return {

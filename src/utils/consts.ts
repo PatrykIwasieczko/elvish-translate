@@ -9,4 +9,5 @@ export const FETCH_TRANSLATION = "fetchTranslationSuccess";
 export const ADD_FAVOURITE = "addFavourite";
 export const LOAD_FAVOURITES = "loadFavourites";
 export const DELETE_FAVOURITE = "deleteFavourites";
-export const EDIT_FAVOURITE = "EDIT_FAVOURITE";
+export const EDIT_FAVOURITE = "editFavourite";
+export const CLEAR_TRANSLATION = "clearTranslation";

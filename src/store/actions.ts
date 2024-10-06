@@ -12,6 +12,8 @@ import {
   FAVOURITE_TRANSLATIONS,
   EDIT_FAVOURITE,
   API_URL,
+  TRANSLATION,
+  CLEAR_TRANSLATION,
 } from "../utils/consts";
 import { Translation } from "../utils/types";
 
@@ -20,12 +22,18 @@ export const fetchTranslation =
     try {
       const response = await fetch(`${API_URL}?text=${text}`);
       const data = await response.json();
-      const elvish = data.contents.translated;
+
+      const translation: Translation = {
+        english: text,
+        elvish: data.contents.translated,
+        id: crypto.randomUUID(),
+      };
 
       dispatch({
         type: FETCH_TRANSLATION_SUCCESS,
-        payload: { english: text, elvish },
+        payload: translation,
       });
+      saveLocalStorageItems(TRANSLATION, translation);
     } catch (error) {
       console.error("Error fetching translation:", error);
     }
@@ -40,6 +48,16 @@ export const addFavourite = (translation: Translation) => {
     dispatch({
       type: ADD_FAVOURITE,
       payload: translation,
+    });
+  };
+};
+
+export const clearTranslation = () => {
+  return (dispatch: Dispatch) => {
+    localStorage.removeItem(TRANSLATION);
+
+    dispatch({
+      type: CLEAR_TRANSLATION,
     });
   };
 };
