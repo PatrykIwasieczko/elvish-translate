@@ -5,7 +5,6 @@ import {
   EDIT_FAVOURITE,
   FETCH_TRANSLATION,
   FETCH_TRANSLATION_SUCCESS,
-  LOAD_FAVOURITES,
   LOGIN,
   LOGOUT,
 } from "./consts";
@@ -46,11 +45,6 @@ export interface ClearTranslation {
   payload: undefined;
 }
 
-export interface LoadFavouritesAction {
-  type: typeof LOAD_FAVOURITES;
-  payload: Translation[];
-}
-
 export interface LoginAction {
   type: typeof LOGIN;
 }
@@ -66,6 +60,5 @@ export type TranslationActionTypes =
   | DeleteFavouriteAction
   | EditFavouriteAction
   | ClearTranslation
-  | LoadFavouritesAction
   | LoginAction
   | LogoutAction;

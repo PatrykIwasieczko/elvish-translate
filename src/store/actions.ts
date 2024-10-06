@@ -8,7 +8,6 @@ import {
 import {
   FETCH_TRANSLATION_SUCCESS,
   ADD_FAVOURITE,
-  LOAD_FAVOURITES,
   DELETE_FAVOURITE,
   FAVOURITE_TRANSLATIONS,
   EDIT_FAVOURITE,
@@ -81,17 +80,6 @@ export const clearTranslation = () => {
 
     dispatch({
       type: CLEAR_TRANSLATION,
-    });
-  };
-};
-
-export const loadFavourites = () => {
-  return (dispatch: Dispatch) => {
-    const favourites = getLocalStorageItems(FAVOURITE_TRANSLATIONS);
-
-    dispatch({
-      type: LOAD_FAVOURITES,
-      payload: favourites,
     });
   };
 };

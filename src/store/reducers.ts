@@ -1,7 +1,6 @@
 import {
   FETCH_TRANSLATION_SUCCESS,
   ADD_FAVOURITE,
-  LOAD_FAVOURITES,
   DELETE_FAVOURITE,
   EDIT_FAVOURITE,
   FAVOURITE_TRANSLATIONS,
@@ -65,11 +64,6 @@ export const rootReducer = (
       return {
         ...state,
         translation: null,
-      };
-    case LOAD_FAVOURITES:
-      return {
-        ...state,
-        favourites: action.payload,
       };
     default:
       return state;
