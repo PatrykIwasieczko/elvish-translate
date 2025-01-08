@@ -7,11 +7,9 @@ import { store } from "./store/store.ts";
 import { BrowserRouter } from "react-router-dom";
 
 import PiwikPro from "@piwikpro/react-piwik-pro";
+import { PIWIK_PRO_KEY, PIWIK_PRO_URL } from "./utils/consts.ts";
 
-PiwikPro.initialize(
-  import.meta.env.VITE_PIWIK_PRO_KEY,
-  import.meta.env.VITE_PIWIK_PRO_URL
-);
+PiwikPro.initialize(PIWIK_PRO_KEY, PIWIK_PRO_URL);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
