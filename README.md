@@ -9,3 +9,5 @@ Currently, two official plugins are available:
 - redux tests
 - proper authorization system
 - database connection instead of local storage
+- proper action handling with displaying error and success messages
+- form validation
